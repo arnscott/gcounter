@@ -1,0 +1,36 @@
+#!/usr/bin/env python
+import argparse
+import time
+
+from gcounter.analysis import count_linked_snps
+
+import lib.queries as queries
+import lib.sqlite
+
+
+start = time.clock()
+
+
+def get_arguments():
+    parser = argparse.ArgumentParser()
+    parser.add_argument('db_location')
+    parser.add_argument('variant_threshold')
+    args = parser.parse_args()
+    return args
+
+
+if __name__ == '__main__':
+    args = get_arguments()
+    with lib.sqlite.connect(args.db_location) as conn:
+        conn.perform_raw_sql(queries.CREATE_LINKED_SNP_FAMILIES_TABLE)
+        conn.perform_raw_sql(queries.CREATE_LINKED_SNP_FAMILY_DATA_TABLE)
+        print('starting analysis')
+        count_linked_snps(conn, int(args.variant_threshold))
+    print('count of linked snp sequences', time.clock() - start)
+
+
+
+
+
+
+

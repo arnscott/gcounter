@@ -1,0 +1,23 @@
+#!/usr/bin/env python
+import argparse
+
+from gcounter.utils import process_vcf
+
+
+def get_arguments():
+    parser = argparse.ArgumentParser()
+    parser.add_argument('file_path')
+    parser.add_argument('number_of_lines')
+    parser.add_argument('output_file')
+    args = parser.parse_args()
+    return args
+
+
+
+if __name__ == '__main__':
+    args = get_arguments()
+    print(args)
+    process_vcf(args.file_path,
+                args.number_of_lines,
+                args.output_file)
+
