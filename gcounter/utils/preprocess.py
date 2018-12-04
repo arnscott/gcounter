@@ -24,22 +24,21 @@ class SAMFile(object):
     def iterrecords(self):
         regex = r'([0-9]+[A-Z])'
         with open(self.file_path) as source:
-            reader = csv.DictReader(source,
-                                    fieldnames=self._sam_fields,
-                                    delimiter='\t')
+            reader = csv.reader(source,
+                                delimiter='\t')
             for row in reader:
-                if re.search(regex, row['CIGAR']):
-                    yield {'QNAME': row['QNAME'],
-                           'FLAG': row['FLAG'],
-                           'RNAME': row['RNAME'],
-                           'POS': row['POS'],
-                           'MAPQ': row['MAPQ'],
-                           'CIGAR': row['CIGAR'],
-                           'RNEXT': row['RNEXT'],
-                           'PNEXT': row['PNEXT'],
-                           'TLEN': row['TLEN'],
-                           'SEQ': row['SEQ'],
-                           'QUAL': row['QUAL']}
+                if re.search(regex, row[5]):
+                    yield {'QNAME': row[0],
+                           'FLAG': row[1],
+                           'RNAME': row[2],
+                           'POS': row[3],
+                           'MAPQ': row[4],
+                           'CIGAR': row[5],
+                           'RNEXT': row[6],
+                           'PNEXT': row[7],
+                           'TLEN': row[8],
+                           'SEQ': row[9],
+                           'QUAL': row[10]}
 
 
 

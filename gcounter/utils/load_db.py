@@ -52,7 +52,7 @@ def load_database(args, conn):
                            row['FILTER'],
                            row['INFO'],
                            row['FORMAT'],
-                           row['String'])]
+                           row['sample'])]
             if count % 10000 == 0:
                 conn.load_records('vcfs', bulk_list)
                 bulk_list = []

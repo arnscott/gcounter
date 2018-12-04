@@ -101,8 +101,9 @@ def identify_variants(conn, rconn):
 
     print('iterating chromosomes')
     for chromosome in chromosomes:
-        print('iterating vcfs')
+        print('iterating vcfs', chromosome)
         vcf_query = queries.VCF_BY_CHROMOSOME.format(chromosome=chromosome)
+        #print(vcf_query)
         for count, vcf in enumerate(conn.iterate_records(vcf_query)):
             sam_query = queries.RELATED_SAM.format(chromosome=chromosome,
                                                    position=vcf.position)

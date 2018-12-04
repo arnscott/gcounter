@@ -8,7 +8,7 @@ select
 from
   vcfs
 where
-  chromosome = {chromosome}
+  chromosome = '{chromosome}'
 order by
   position"""
 
@@ -24,7 +24,7 @@ select
 from
   sams
 where
-  rname = {chromosome} and
+  rname = '{chromosome}' and
   pos < {position} and
   end_pos > {position}"""
 
